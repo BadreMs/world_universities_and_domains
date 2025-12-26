@@ -1,0 +1,24 @@
+services: 
+  jupyter-spark: 
+    image: jupyter/pyspark-notebook:latest 
+    container_name: jupyter_spark 
+    ports: 
+      - "8888:8888" 
+    volumes: 
+      - ./notebooks:/home/jovyan/work/notebooks 
+      - ./data:/home/jovyan/work/data 
+    environment: 
+      - JUPYTER_ENABLE_LAB=yes 
+  postgres: 
+    image: postgres:16 
+    container_name: universities_pg 
+    environment: 
+      POSTGRES_USER: de_user 
+      POSTGRES_PASSWORD: de_pass 
+      POSTGRES_DB: universities_dw 
+    ports: 
+      - "5432:5432" 
+    volumes: 
+      - pgdata:/var/lib/postgresql/data 
+volumes: 
+  pgdata:
